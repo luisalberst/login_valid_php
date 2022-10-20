@@ -1,38 +1,3 @@
-<!--
-    Use ajax to get a response with username_err && password_err for validate on login page and redirect
-
-    AJAX VALIDATE
-
-        $(function(){
-            $('#login').on('click',function(e){
-                e.preventDefault();                
-                var username = $('#username').val();
-                var password = $('#password').val();
-                $.ajax({
-                    type: "POST",
-                    url: "valid_login.php",
-                    data: ('username='+username+'&password='+password),
-                    success: function(response){
-                        if (response == 1 || response == 11){                            
-                            alert('Se debe ingresar usuario y/o contraseña');
-                        } else if (response == 3){
-                            location.replace('/teacher/index.php'); 
-                        }  else if (response == 4){
-                            location.replace('/user/index.php'); 
-                        } else if (response == 5) {
-                            location.replace('/admin/index.php'); 
-                        } else if (response == 6 || response == 7) {                                                                               
-                            alert('Usuario y/o Contraseña invalidos o no existen');                     
-                        } else if (response == 0) {
-                            alert('Algo salió mal, por favor vuelve a intentarlo');
-                        }
-                    }
-                });
-            });
-        });
-    
-
--->
 <?php
         // Include config file
         // $_SERVER['DOCUMENT_ROOT'] get server path / route
@@ -89,21 +54,14 @@
                                         $_SESSION["username"] = $username;     
                                         $_SESSION["type_user"] = $type_user; // session data of var (get bd type_user)
                                         
-                                        /*
-                                            UNIQUE VALIDATE
-                                            // Validate session and display success for redirect to home page
-                                            return '5';
-                                        */
-                                        //SINGLE VALIDATE
                                         //---- TEACHER / USER / ADMIN ---
-                                        if $type_user === 'teacher'{
-                                            return '3';
-                                        } else if ($type_user === 'user'){
-                                            return '4';
+                                        if ($type_user === 'teacher'){
+                                            echo 3;
+                                        } else if ($type_user === 'student'){
+                                            echo 4;
                                         } else if ($type_user === 'admin'){
-                                            return '5';
-                                        }
-                                        
+                                            echo 5;
+                                        }                                        
                                         
                                 } else{
                                     // Display an error message if password is not valid (Password invalid)
