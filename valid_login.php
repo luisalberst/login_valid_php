@@ -1,33 +1,7 @@
 <!--
     Use ajax to get a response with username_err && password_err for validate on login page and redirect
 
-    UNIQUE VALIDATE
-
-        $(function(){
-            $('#login').on('click',function(e){
-                e.preventDefault();                
-                var username = $('#username').val();
-                var password = $('#password').val();
-                $.ajax({
-                    type: "POST",
-                    url: "valid_login.php",
-                    data: ('username='+username+'&password='+password),
-                    success: function(response){
-                        if (response == 1 || response == 11){                            
-                            alert('Se debe ingresar usuario y/o contraseña');  
-                        } else if (response == 5) {
-                            location.replace('/admin/index.php'); 
-                        } else if (response == 6 || response == 7) {                                                                               
-                            alert('Usuario y/o Contraseña invalidos o no existen');                     
-                        } else if (response == 0) {
-                            alert('Algo salió mal, por favor vuelve a intentarlo');
-                        }
-                    }
-                });
-            });
-        });
-
-    SINGLE VALIDATE
+    AJAX VALIDATE
 
         $(function(){
             $('#login').on('click',function(e){
@@ -61,7 +35,8 @@
 -->
 <?php
         // Include config file
-        require_once ($_SERVER['DOCUMENT_ROOT']."/assets/bd/config.php");
+        // $_SERVER['DOCUMENT_ROOT'] get server path / route
+        require_once ($_SERVER['DOCUMENT_ROOT']."/bd/config.php"); // Conexión File
     
         // Define variables and initialize with empty values
         $username = $password = "";
